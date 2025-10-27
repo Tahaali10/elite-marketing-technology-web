@@ -12697,9 +12697,11 @@ span.rot-minus {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 150px;
+  margin-bottom: 175px;
 }
 
-.bg-video {
+/* .bg-video {
   position: absolute;
   top: 0;
   left: 0;
@@ -12707,7 +12709,7 @@ span.rot-minus {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-}
+} */
 
 /* Futuristic gradient overlay */
 .video-container::before {
@@ -12851,7 +12853,7 @@ span.rot-minus {
   height: 100%;
   object-fit: cover;
   z-index: -2;
-  filter: brightness(0.7) contrast(1.1);
+  /* filter: brightness(0.7) contrast(1.1); */
 }
 
 /* Floating elements for futuristic effect */
@@ -12906,6 +12908,7 @@ span.rot-minus {
   .video-container {
     height: 70vh;
     justify-content: center;
+    margin: 0px !important
   }
 
   .content-card {
