@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Branch Timeline</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+            color: #2e7d32;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #1b5e20;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #388e3c;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tree-timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-left: 20px;
+        }
+        
+        .tree-trunk {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 15px;
+            background: linear-gradient(to bottom, #5d4037, #8d6e63);
+            border-radius: 10px;
+        }
+        
+        .branch {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+        
+        .branch::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 30px;
+            height: 3px;
+            background: #5d4037;
+            border-radius: 3px;
+        }
+        
+        .leaf {
+            background: white;
+            border-radius: 20px 20px 20px 5px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .leaf.active {
+            background: linear-gradient(45deg, #4caf50, #8bc34a);
+            color: white;
+            transform: translateX(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+        
+        .leaf-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .leaf-icon {
+            width: 40px;
+            height: 40px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .leaf-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .leaf-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .leaf-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .leaf.active .leaf-content {
+            max-height: 300px;
+        }
+        
+        .leaf-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .leaf-content ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .leaf-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* Mobile-first design */
+        @media (min-width: 768px) {
+            .tree-timeline {
+                padding-left: 60px;
+                margin-left: 40px;
+            }
+            
+            .tree-trunk {
+                width: 20px;
+            }
+            
+            .branch::before {
+                width: 40px;
+                left: -20px;
+            }
+            
+            .leaf {
+                padding: 25px;
+            }
+            
+            .leaf:hover {
+                transform: translateX(10px);
+            }
+            
+            .leaf.active {
+                transform: translateX(20px);
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .leaf-title {
+                font-size: 1.2rem;
+            }
+            
+            .tree-timeline {
+                padding-left: 30px;
+                margin-left: 10px;
+            }
+        }
+        
+        .instructions {
+            text-align: center;
+            margin-top: 40px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Our Growth Story</h1>
+            <p>From a small seed to a thriving tree of innovation</p>
+        </div>
+        
+        <div class="tree-timeline">
+            <div class="tree-trunk"></div>
+            
+            <div class="branch">
+                <div class="leaf">
+                    <div class="leaf-header">
+                        <div class="leaf-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div>
+                            <div class="leaf-title">Planting the Seed</div>
+                            <div class="leaf-date">Spring 2015</div>
+                        </div>
+                    </div>
+                    <div class="leaf-content">
+                        <p>Our journey began with a simple idea and a passionate team of three people working from a small garage.</p>
+                        <ul>
+                            <li>Founded with personal savings</li>
+                            <li>First product concept developed</li>
+                            <li>Initial market research conducted</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="branch">
+                <div class="leaf">
+                    <div class="leaf-header">
+                        <div class="leaf-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div>
+                            <div class="leaf-title">First Growth</div>
+                            <div class="leaf-date">Summer 2017</div>
+                        </div>
+                    </div>
+                    <div class="leaf-content">
+                        <p>Our first product launch exceeded expectations and allowed us to expand our team and vision.</p>
+                        <ul>
+                            <li>Launched MVP to positive reception</li>
+                            <li>Grew team to 15 members</li>
+                            <li>Secured first round of funding</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="branch">
+                <div class="leaf">
+                    <div class="leaf-header">
+                        <div class="leaf-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div>
+                            <div class="leaf-title">Expanding Roots</div>
+                            <div class="leaf-date">Fall 2019</div>
+                        </div>
+                    </div>
+                    <div class="leaf-content">
+                        <p>We expanded to international markets and formed key partnerships that would shape our future.</p>
+                        <ul>
+                            <li>Expanded to 3 new countries</li>
+                            <li>Formed strategic partnerships</li>
+                            <li>Product line expanded to 5 offerings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="branch">
+                <div class="leaf">
+                    <div class="leaf-header">
+                        <div class="leaf-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <div>
+                            <div class="leaf-title">Bearing Fruit</div>
+                            <div class="leaf-date">Spring 2021</div>
+                        </div>
+                    </div>
+                    <div class="leaf-content">
+                        <p>Our innovations began receiving industry recognition and our customer base grew exponentially.</p>
+                        <ul>
+                            <li>Reached 1 million customers</li>
+                            <li>Won "Innovation of the Year" award</li>
+                            <li>Introduced AI technology to our platform</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="branch">
+                <div class="leaf">
+                    <div class="leaf-header">
+                        <div class="leaf-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div>
+                            <div class="leaf-title">Global Reach</div>
+                            <div class="leaf-date">Present</div>
+                        </div>
+                    </div>
+                    <div class="leaf-content">
+                        <p>Today we're a globally recognized brand with a mission to make a positive impact on the world.</p>
+                        <ul>
+                            <li>Operating in 15 countries</li>
+                            <li>Team of 200+ professionals</li>
+                            <li>Serving 2.5 million customers worldwide</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <p><i class="fas fa-mobile-alt"></i> Tap on any leaf to explore our story</p>
+            <p><i class="fas fa-desktop"></i> On desktop, hover over the leaves</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const leaves = document.querySelectorAll('.leaf');
+            
+            leaves.forEach(leaf => {
+                leaf.addEventListener('click', function() {
+                    // Close other open leaves
+                    leaves.forEach(l => {
+                        if (l !== leaf && l.classList.contains('active')) {
+                            l.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle this leaf
+                    leaf.classList.toggle('active');
+                });
+            });
+            
+            // Close leaves when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.leaf')) {
+                    leaves.forEach(leaf => {
+                        leaf.classList.remove('active');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

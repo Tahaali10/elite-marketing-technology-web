@@ -1,0 +1,40 @@
+.map-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.world-map {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  display: block;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* forces GPU rendering to prevent flicker */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .vl-map-area {
+    padding-top: 50px;
+    padding-bottom: 40px;
+  }
+
+  .vl-section-title {
+    font-size: 1.5rem;
+  }
+
+  .vl-section-subtitle-6 {
+    font-size: 0.9rem;
+  }
+
+  .world-map {
+    border-radius: 8px;
+  }
+}
